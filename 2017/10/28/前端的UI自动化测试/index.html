@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>前端的UI自动化测试 | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="0. 背景 单元测试：对构成程序的每个单元进行测试。工程上的一个共识是，如果程序的每个模块都是正确的、模块与模块的连接是正确的、那么程序基本上就会是正确的。以上是抄的，我也不懂。我的理解分两块，什么是单元？可以是函数、接口、组件、事务（what？）。什么是测试？就是验证功能，给予相同的输入（可以是数据、行为），会有相同的输出。 TDD（Test-Driven Development）：测试驱动开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端的UI自动化测试">
+<meta property="og:url" content="http://maizsss.github.io/2017/10/28/前端的UI自动化测试/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="0. 背景 单元测试：对构成程序的每个单元进行测试。工程上的一个共识是，如果程序的每个模块都是正确的、模块与模块的连接是正确的、那么程序基本上就会是正确的。以上是抄的，我也不懂。我的理解分两块，什么是单元？可以是函数、接口、组件、事务（what？）。什么是测试？就是验证功能，给予相同的输入（可以是数据、行为），会有相同的输出。 TDD（Test-Driven Development）：测试驱动开发">
+<meta property="og:updated_time" content="2017-10-28T08:41:05.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端的UI自动化测试">
+<meta name="twitter:description" content="0. 背景 单元测试：对构成程序的每个单元进行测试。工程上的一个共识是，如果程序的每个模块都是正确的、模块与模块的连接是正确的、那么程序基本上就会是正确的。以上是抄的，我也不懂。我的理解分两块，什么是单元？可以是函数、接口、组件、事务（what？）。什么是测试？就是验证功能，给予相同的输入（可以是数据、行为），会有相同的输出。 TDD（Test-Driven Development）：测试驱动开发">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">前端的UI自动化测试</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">前端的UI自动化测试</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-28T07:14:09.000Z" itemprop="datePublished" class="page-time">
+  2017-10-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#0-背景"><span class="post-toc-text">0. 背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-相关工具"><span class="post-toc-text">1. 相关工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-使用"><span class="post-toc-text">2. 使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-nightmare的使用"><span class="post-toc-text">3. nightmare的使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-mocha结合nightmare进行测试"><span class="post-toc-text">4. mocha结合nightmare进行测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-使用mochawesome生成测试报告"><span class="post-toc-text">5. 使用mochawesome生成测试报告</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-其他东西"><span class="post-toc-text">6. 其他东西</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-前端的UI自动化测试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">前端的UI自动化测试</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-28 15:14:09" datetime="2017-10-28T07:14:09.000Z"  itemprop="datePublished">2017-10-28</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="0-背景"><a href="#0-背景" class="headerlink" title="0. 背景"></a>0. 背景</h2><ul>
+<li>单元测试：对构成程序的每个单元进行测试。工程上的一个共识是，如果程序的每个模块都是正确的、模块与模块的连接是正确的、那么程序基本上就会是正确的。以上是抄的，我也不懂。我的理解分两块，什么是单元？可以是函数、接口、组件、事务（what？）。什么是测试？就是验证功能，给予相同的输入（可以是数据、行为），会有相同的输出。</li>
+<li>TDD（Test-Driven Development）：测试驱动开发。现写测试，后写业务，或者并行。对写测试的开发要求较高。</li>
+<li>vue、react等组件化框架天生易于被测试，如<a href="https://github.com/ElemeFE/element/blob/dev/test/unit/specs/alert.spec.js" target="_blank" rel="external">element对alert组件测试的例子</a>。理论上项目中的vue、react等组件都可以写测试，但前提是组件封装优良，模块间松耦合，对代码编写规范有要求。</li>
+<li>下面要吹的是一套针对与UI测试的套件。</li>
+</ul>
+<h2 id="1-相关工具"><a href="#1-相关工具" class="headerlink" title="1. 相关工具"></a>1. 相关工具</h2><ul>
+<li>测试框架: Mocha（可以参考<a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="external">阮一峰的文章</a>）</li>
+<li>断言库: Chai <a href="http://www.jianshu.com/p/f200a75a15d2" target="_blank" rel="external">详情看文章介绍</a></li>
+<li>测试工具: nightmare(git:<a href="https://github.com/segmentio/nightmare)。这是一个基于electron的自动化框架，相比起PhantomJS的语法更加简单。" target="_blank" rel="external">https://github.com/segmentio/nightmare)。这是一个基于electron的自动化框架，相比起PhantomJS的语法更加简单。</a></li>
+</ul>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h2><ul>
+<li><p>全局安装mocha：npm install -g mocha</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># Linux &amp; Mac</div><div class="line">$ env ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ </div><div class="line">$ npm install</div><div class="line"></div><div class="line"># Windows</div><div class="line">$ set ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行一个测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha ./testDemo/demo3.useChai.fn1.test.js</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行一系列测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha ./testDemo</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-nightmare的使用"><a href="#3-nightmare的使用" class="headerlink" title="3. nightmare的使用"></a>3. nightmare的使用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Nightmare = <span class="built_in">require</span>(<span class="string">'nightmare'</span>);</div><div class="line"><span class="keyword">const</span> nightmare = Nightmare(&#123;</div><div class="line">  	show: <span class="literal">true</span>, <span class="comment">//是否显示浏览器窗口</span></div><div class="line">  	width: <span class="number">1920</span>, <span class="comment">//浏览器窗口宽度</span></div><div class="line">	height: <span class="number">1080</span> <span class="comment">//浏览器窗口高度</span></div><div class="line">&#125;);</div><div class="line">nightmare</div><div class="line">	.goto(<span class="string">'http://www.linghit.com/'</span>) <span class="comment">//打开一个url</span></div><div class="line">	.wait(<span class="string">'#generalize_content'</span>) <span class="comment">//等待某个元素出现在dom</span></div><div class="line">	.wait(<span class="number">2000</span>) <span class="comment">//等待2000ms</span></div><div class="line">	.click(<span class="string">'#closed'</span>) <span class="comment">//点击某个dom</span></div><div class="line">	.evaluate(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">//在浏览器环境下的操作</span></div><div class="line">		<span class="keyword">return</span> <span class="built_in">window</span>.location.href;</div><div class="line">	&#125;)</div><div class="line">	.end() <span class="comment">//结束一个nightmare队列</span></div><div class="line">	.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123; <span class="comment">//获取到evaluate的return值</span></div><div class="line">		<span class="built_in">console</span>.log(res);</div><div class="line">	&#125;)</div><div class="line">	.catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123; <span class="comment">//捕捉错误</span></div><div class="line">		<span class="built_in">console</span>.log(err);</div><div class="line">	&#125;)</div></pre></td></tr></table></figure>
+<h2 id="4-mocha结合nightmare进行测试"><a href="#4-mocha结合nightmare进行测试" class="headerlink" title="4. mocha结合nightmare进行测试"></a>4. mocha结合nightmare进行测试</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"><span class="keyword">const</span> expect = <span class="built_in">require</span>(<span class="string">'chai'</span>).expect;</div><div class="line"><span class="keyword">const</span> Nightmare = <span class="built_in">require</span>(<span class="string">'nightmare'</span>);</div><div class="line"><span class="keyword">const</span> nightmare = Nightmare(&#123;</div><div class="line">  	show: <span class="literal">true</span>,</div><div class="line">  	width: <span class="number">1920</span>,</div><div class="line">	height: <span class="number">1080</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">describe(<span class="string">'灵机官网'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">// 用例超时时长</span></div><div class="line">    <span class="keyword">this</span>.timeout(<span class="number">5</span> * <span class="number">1000</span>);</div><div class="line"></div><div class="line">	it(<span class="string">'页面是否能正常打开'</span>, (done) =&gt; &#123;</div><div class="line">		nightmare</div><div class="line">			.goto(<span class="string">'http://www.linghit.com/'</span>)</div><div class="line">			.wait(<span class="string">'#generalize_content'</span>)</div><div class="line">			.wait(<span class="number">1000</span>)</div><div class="line">			.click(<span class="string">'#closed'</span>)</div><div class="line">			.evaluate(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> bannerLen = $(<span class="string">'.banner'</span>).length;</div><div class="line">				<span class="keyword">return</span> &#123;</div><div class="line">					bannerLen: bannerLen</div><div class="line">				&#125;;</div><div class="line">			&#125;)</div><div class="line">			.end()</div><div class="line">			.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">				expect(res.bannerLen).to.above(<span class="number">0</span>);</div><div class="line">				done();</div><div class="line">			&#125;)</div><div class="line">			.catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</div><div class="line">				done(err);</div><div class="line">			&#125;)</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="5-使用mochawesome生成测试报告"><a href="#5-使用mochawesome生成测试报告" class="headerlink" title="5. 使用mochawesome生成测试报告"></a>5. 使用mochawesome生成测试报告</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha .\testDemo\demo7.linghit.report.test.js --reporter mochawesome</div></pre></td></tr></table></figure>
+<h2 id="6-其他东西"><a href="#6-其他东西" class="headerlink" title="6. 其他东西"></a>6. 其他东西</h2><ul>
+<li><p>nightmare的截屏</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.screenshot([path][, clip])</div></pre></td></tr></table></figure>
+</li>
+<li><p>mocha的钩子函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">before(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 在本区块的所有测试用例之前执行</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">after(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 在本区块的所有测试用例之后执行</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">beforeEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 在本区块的每个测试用例之前执行</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">afterEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 在本区块的每个测试用例之后执行</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过node脚本定时巡航页面，并上报测试结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;!-- index.js --&gt;</div><div class="line">setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="comment">// 当然定时任务不会用setInterval。。。</span></div><div class="line">	shell.exec(<span class="string">'mocha ./testDemo/demo8.other.test.js --reporter mochawesome'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">		<span class="keyword">if</span>( err ) &#123;</div><div class="line">			<span class="keyword">throw</span> err;</div><div class="line">		&#125; <span class="keyword">else</span> </div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;, <span class="number">10</span> * <span class="number">1000</span>);</div><div class="line"></div><div class="line">&lt;!-- 测试脚本 --&gt;</div><div class="line">after(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">// 统一上报测试结果</span></div><div class="line">	<span class="keyword">var</span> options = &#123;</div><div class="line">		method: <span class="string">'POST'</span>,</div><div class="line">    	url: <span class="string">'http://localhost:3000/api/test/report'</span>,</div><div class="line">    	body: reportObj, <span class="comment">//reportObj对象收集图片url，错误信息等等</span></div><div class="line">	    json: <span class="literal">true</span></div><div class="line">    &#125;;</div><div class="line"> </div><div class="line">    <span class="keyword">var</span> res = <span class="keyword">await</span> request(options);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2017-10-28T08:41:05.159Z" itemprop="dateUpdated">2017-10-28 16:41:05</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/01/vue项目的错误捕获方式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">vue项目的错误捕获方式</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
