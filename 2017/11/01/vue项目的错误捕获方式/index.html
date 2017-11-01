@@ -169,14 +169,8 @@
 <li><p>通常MVVM项目会有一个（或多个）入口html or js，假如我在入口处如此监听全局错误：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">  &lt;div id=&quot;container&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt;</div><div class="line">      &lt;router-view&gt;&lt;/router-view&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  </div><div class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">      window.onerror = function (msg, script, line, columns, error) &#123;</div><div class="line">          console.log(msg);</div><div class="line">          console.log(script);</div><div class="line">          console.log(line);</div><div class="line">          console.log(columns);</div><div class="line">      &#125;</div><div class="line">  &lt;/script&gt;</div><div class="line">  &lt;script type=&quot;text/javascript&quot; src=&quot;http://XXX.XXX.XXX/static/js/app.js&quot;&gt;&lt;/script&gt;&lt;/body&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
 </li>
-<li><p>当入口js逻辑出现问题时,控制台出现报错信息</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xpsli.com1.z0.glb.clouddn.com/vue_catch_error1.png" alt="image" title="">
-                </div>
-                <div class="image-caption">image</div>
-            </figure></li>
+<li><p>当入口js逻辑出现问题时,控制台出现报错信息<br><img src="http://7xpsli.com1.z0.glb.clouddn.com/vue_catch_error1.png" alt="image"></p>
+</li>
 <li><p>然而在onerror的错误捕获代码却输出</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">console.log(msg); //Script error.</div><div class="line">console.log(script); //&apos;&apos;</div><div class="line">console.log(line); //0</div><div class="line">console.log(columns); //0</div></pre></td></tr></table></figure>
 </li>
@@ -218,7 +212,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2017-11-01T04:17:20.394Z" itemprop="dateUpdated">2017-11-01 12:17:20</time>
+    最后更新时间：<time datetime="2017-11-01T04:17:20.394Z" itemprop="dateUpdated">2017-11-01 12:17:20</time>
 </span><br>
 
 
@@ -269,6 +263,23 @@
 
 
 
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'maizsss',
+            repo: 'https://github.com/maizsss/maizsss.github.io.git',
+            oauth: {
+                client_id: '5678678a14001cd91fe7',
+                client_secret: 'c7f9d0b7955a484dfbdde68b0ef32406c7d0fcfe',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
 
 
 
@@ -295,7 +306,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div> -->
     <div class="bottom">
