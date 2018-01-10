@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Linux基础学习笔记(1) | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="安装虚拟机 虚拟机对于初上手Linux系统的人来说，是最经济的选择。能够省去买云服务器的费用，也能从Linux的安装开始学习Linux。在工作中也能从Windows或者Mac无缝切换到虚拟机环境。   virtual box下载 centos镜像 其他事项 虚拟机配置（用于开发）：redhat64位、1g内存、40g硬盘 点击虚拟机界面后，鼠标会独占，右ctrl能取消独占 设置windows与虚拟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础学习笔记(1)">
+<meta property="og:url" content="http://maizsss.github.io/2018/01/07/Linux基础学习笔记(1)/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="安装虚拟机 虚拟机对于初上手Linux系统的人来说，是最经济的选择。能够省去买云服务器的费用，也能从Linux的安装开始学习Linux。在工作中也能从Windows或者Mac无缝切换到虚拟机环境。   virtual box下载 centos镜像 其他事项 虚拟机配置（用于开发）：redhat64位、1g内存、40g硬盘 点击虚拟机界面后，鼠标会独占，右ctrl能取消独占 设置windows与虚拟">
+<meta property="og:updated_time" content="2018-01-10T02:16:29.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基础学习笔记(1)">
+<meta name="twitter:description" content="安装虚拟机 虚拟机对于初上手Linux系统的人来说，是最经济的选择。能够省去买云服务器的费用，也能从Linux的安装开始学习Linux。在工作中也能从Windows或者Mac无缝切换到虚拟机环境。   virtual box下载 centos镜像 其他事项 虚拟机配置（用于开发）：redhat64位、1g内存、40g硬盘 点击虚拟机界面后，鼠标会独占，右ctrl能取消独占 设置windows与虚拟">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux基础学习笔记(1)</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux基础学习笔记(1)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-07T08:02:25.000Z" itemprop="datePublished" class="page-time">
+  2018-01-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装虚拟机"><span class="post-toc-text">安装虚拟机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSH服务"><span class="post-toc-text">SSH服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SSH-config"><span class="post-toc-text">SSH config</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ssh免密登录："><span class="post-toc-text">ssh免密登录：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ssh安全端口（修改端口）"><span class="post-toc-text">ssh安全端口（修改端口）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux常用命令"><span class="post-toc-text">Linux常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件操作命令"><span class="post-toc-text">软件操作命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#硬件资源信息"><span class="post-toc-text">硬件资源信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文件操作命令"><span class="post-toc-text">文件操作命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#系统用户命令"><span class="post-toc-text">系统用户命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#防火墙设置"><span class="post-toc-text">防火墙设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提权和文件上传下载操作"><span class="post-toc-text">提权和文件上传下载操作</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Linux基础学习笔记(1)"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux基础学习笔记(1)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-07 16:02:25" datetime="2018-01-07T08:02:25.000Z"  itemprop="datePublished">2018-01-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><blockquote>
+<p>虚拟机对于初上手Linux系统的人来说，是最经济的选择。能够省去买云服务器的费用，也能从Linux的安装开始学习Linux。在工作中也能从Windows或者Mac无缝切换到虚拟机环境。</p>
+</blockquote>
+<ul>
+<li><a href="http://download.virtualbox.org/virtualbox/5.2.4/VirtualBox-5.2.4-119785-Win.exe" target="_blank" rel="external">virtual box下载</a></li>
+<li><a href="http://mirrors.163.com/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1708.iso" target="_blank" rel="external">centos镜像</a></li>
+<li>其他事项<ul>
+<li>虚拟机配置（用于开发）：redhat64位、1g内存、40g硬盘</li>
+<li>点击虚拟机界面后，鼠标会独占，右ctrl能取消独占</li>
+<li>设置windows与虚拟机之间的复制粘贴：设备-共享粘贴板-双向。（好像无效，还是用ssh吧。）</li>
+<li><a href="mirrors.163.com">mirrors.163.com</a>是网易的镜像站，含有大量Linux镜像资源,免除国内访问国外资源很慢的烦恼。</li>
+</ul>
+</li>
+</ul>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
+<p>Minimal的镜像是最小系统镜像，不包含网络等其他软件，需要自己配置。</p>
+</blockquote>
+<ul>
+<li>ifconfig（查看网络配置）<ul>
+<li>yum install net-tools (安装该工具使ifconfig命令可用)</li>
+</ul>
+</li>
+<li>ip addr（查看ip地址）</li>
+<li>vi /etc/sysconfig/network-scripts/ifcfg-xx <ul>
+<li>xx在ip addr的2：{网卡名}</li>
+<li>编辑ONBOOT=yes</li>
+<li>命令： service network restart</li>
+</ul>
+</li>
+<li>yum需要先替换默认源：<a href="http://mirrors.163.com/.help/centos.html" target="_blank" rel="external">步骤</a><ul>
+<li>内网ip换成局域网ip。虚拟机先关机，设置-网络-连接方式改成桥接。得到局域网ip可用于虚拟机ssh连接。</li>
+<li>wget（yum install wget）</li>
+<li>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</li>
+<li>cd /etc/yum.repos.d/</li>
+<li>wget <a href="http://mirrors.163.com/.help/CentOS7-Base-163.repo" target="_blank" rel="external">http://mirrors.163.com/.help/CentOS7-Base-163.repo</a></li>
+<li>yum clean all; yum makecache</li>
+</ul>
+</li>
+</ul>
+<h2 id="SSH服务"><a href="#SSH服务" class="headerlink" title="SSH服务"></a>SSH服务</h2><blockquote>
+<p>SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
+<li>安装SSH yum install openssh-server</li>
+<li>启动 service sshd start</li>
+<li>设置开机运行 chkconfig sshd on</li>
+<li>linux平台安装SSH客户端 yum install openssh-clients(其实在安装openssh-server时已经顺便被安装好)</li>
+<li>连接。 ssh {帐号}@{ip:端口(不填默认22)} -&gt; 输入密码</li>
+</ul>
+</blockquote>
+<h4 id="SSH-config"><a href="#SSH-config" class="headerlink" title="SSH config"></a>SSH config</h4><ul>
+<li>config是为了方便批量管理多个ssh</li>
+<li>config存放在 ~/.ssh/config</li>
+<li>config配置语法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">host &quot;&#123;名称1&#125;&quot;</div><div class="line">    HostName &#123;ip&#125;</div><div class="line">    User &#123;帐号&#125;</div><div class="line">    Port &#123;端口&#125;</div><div class="line">    </div><div class="line">host &quot;&#123;名称2&#125;&quot;</div><div class="line">    HostName &#123;ip&#125;</div><div class="line">    User &#123;帐号&#125;</div><div class="line">    Port &#123;端口&#125;</div><div class="line">// 设置完就能以这种形式连接：ssh &#123;名称&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="ssh免密登录："><a href="#ssh免密登录：" class="headerlink" title="ssh免密登录："></a>ssh免密登录：</h4><ul>
+<li>ssh key（使用非对称方式生成公钥和私钥）。私钥（~/.ssh）,公钥（~/.ssh/authorized_keys）</li>
+<li><p>linux生成ssh key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line">ssh-keygen</div><div class="line">输入名字</div><div class="line">输入密码（可空）</div></pre></td></tr></table></figure>
+</li>
+<li><p>把.pub（公钥文件）内容放在~/.ssh/authorized_keys</p>
+</li>
+<li>ssh-add ~/.ssh/imooc_rsa(linux需要)</li>
+<li><h4 id="ssh安全端口（修改端口）"><a href="#ssh安全端口（修改端口）" class="headerlink" title="ssh安全端口（修改端口）"></a>ssh安全端口（修改端口）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vim /etc/ssh/sshd_config</div><div class="line">——————</div><div class="line">Port &#123;端口号1&#125;</div><div class="line">Port &#123;端口号2&#125;</div><div class="line">——————</div><div class="line">service sshd restart</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h4 id="软件操作命令"><a href="#软件操作命令" class="headerlink" title="软件操作命令"></a>软件操作命令</h4><ul>
+<li>软件包管理器：yum</li>
+<li>安装软件：yum install xxx</li>
+<li>卸载软件：yum remove xxx</li>
+<li>搜索软件：yum search xxx</li>
+<li>清理缓存：yum clean packages</li>
+<li>列出已安装：yum list</li>
+<li>软件包信息：yum info xxx</li>
+</ul>
+<h4 id="硬件资源信息"><a href="#硬件资源信息" class="headerlink" title="硬件资源信息"></a>硬件资源信息</h4><ul>
+<li>内存：free -m</li>
+<li>硬盘：df -h</li>
+<li>负载：w或top<ul>
+<li>load average： 0.00（最近1min） 0.01（最近5min） 0.05（最近10min）</li>
+<li>等于1是满负荷</li>
+<li>大于1超负荷</li>
+<li>0.6~0.7是健康值</li>
+</ul>
+</li>
+<li>cpu个数和核数<ul>
+<li>cat /proc/cpuinfo</li>
+<li>cat是查看文件内容</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件操作命令"><a href="#文件操作命令" class="headerlink" title="文件操作命令"></a>文件操作命令</h4><ul>
+<li>Linux文件目录结构<ul>
+<li>根目录: /</li>
+<li>家目录：/home</li>
+<li>临时目录: /tmp</li>
+<li>配置目录: /etc</li>
+<li>用户程序目录: /usr</li>
+</ul>
+</li>
+<li>文件基本操作命令<ul>
+<li>查看目录下的文件: ls（ls -al == ll 显示文件详细信息）</li>
+<li>新建文件： touch</li>
+<li>新建文件夹：mkdir（-p 表示循环生成）</li>
+<li>进入目录： cd</li>
+<li>删除文件和目录：rm（-r 表示循环删除， -rf 表示强制删除）</li>
+<li>复制：cp</li>
+<li>移动： mv</li>
+<li>显示路径：pwd</li>
+</ul>
+</li>
+<li>Vim<ul>
+<li><a href="http://www.runoob.com/linux/linux-vim.html" target="_blank" rel="external">教程</a></li>
+<li>i键进入insert模式</li>
+<li>esc退出insert模式，然后:wq(保存退出)，:q(退出)，:w(保存)</li>
+<li>G（最后一行），gg（行首）</li>
+<li>dd(删除本行), u(恢复)</li>
+<li>yy（复制光标所在行），p（粘贴）</li>
+</ul>
+</li>
+<li>文件权限421<ul>
+<li>r=4(读) w=2(写) x=1(可执行)</li>
+<li>drwxr-xr-x d表示文件类型，755</li>
+</ul>
+</li>
+<li>文件搜索，查找，读取<ul>
+<li>从文件尾部读取：tail(-f)</li>
+<li>从文件头部读取：head</li>
+<li>读取整个文件：cat</li>
+<li>分页读取：more(enter键往下继续读)</li>
+<li>可控分页：less</li>
+<li>搜索关键字：grep(-n显示行数 “{关键字}” {文件名})</li>
+<li>查找文件：find（如：find . -name “{文件名关键字}”，-type表示查找类型，-ctime表示更新过的时间、天）</li>
+<li>统计个数：wc</li>
+<li>管道：|（把上一次操作的结果传递给下一次操作，如：grep “{关键字}” {文件名}|wc -l，统计某文件里出现某关键字的行数）</li>
+</ul>
+</li>
+<li>文件压缩解压<ul>
+<li>man {命令}（查看一个命令的说明）</li>
+<li>压缩、解压：tar<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-cf &#123;文件名.tar&#125; &#123;文件名&#125;,创建一个压缩文件</div><div class="line">-tf,查看压缩文件内容</div><div class="line">-tvf,查看压缩文件详细内容</div><div class="line">-xf,解压文件</div><div class="line">-czvf &#123;文件名.tar.gz&#125; &#123;文件名&#125;,创建一个.gz压缩文件并查看</div><div class="line">-tzvf， 查看一个.gz压缩文件</div><div class="line">-xzvf,解压一个.gz压缩文件</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="系统用户命令"><a href="#系统用户命令" class="headerlink" title="系统用户命令"></a>系统用户命令</h4><ul>
+<li><p>添加用户：useradd</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">useradd &#123;用户名&#125;</div><div class="line">passwd &#123;用户名&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>adduser（与useradd有何不同）</p>
+</li>
+<li>删除用户：userdel（-r，彻底删除）</li>
+<li>设置密码：passwd</li>
+</ul>
+<h4 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h4><ul>
+<li>安装：yum install firewalld</li>
+<li>启动：service firewalld start</li>
+<li>重启：service firewalld restart</li>
+<li>检查状态：service firewalld status</li>
+<li>关闭或禁用防火墙：service firewalld stop/disable</li>
+<li>firewall-cmd<ul>
+<li>移除服务：–remove-service=ssh</li>
+<li>添加服务：–add-service=ssh</li>
+<li>查询具体的某个服务：–query-service=ssh</li>
+<li>列出服务：–list-services</li>
+<li>查询端口：–query-port=22/tcp</li>
+<li>添加端口：–add-port=22/tcp</li>
+<li>列出端口：–list-ports</li>
+<li>列出区域配置情况：–list-all-zones</li>
+<li><h4 id="提权和文件上传下载操作"><a href="#提权和文件上传下载操作" class="headerlink" title="提权和文件上传下载操作"></a>提权和文件上传下载操作</h4></li>
+</ul>
+</li>
+<li><p>提权</p>
+<ul>
+<li>sudo<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">visudo</div><div class="line">增加行:%&#123;需要提权的帐号&#125; ALL=(ALL) ALL, 保存退出</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>文件下载</p>
+<ul>
+<li>wget {链接}</li>
+<li>curl<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -o &#123;文件名&#125; &#123;链接&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>文件上传</p>
+<ul>
+<li>从本地上传到远端：scp {文件名} {用户名}@{ip}:{路径}</li>
+<li>从远端下载到本地：scp {用户名}@{ip}:{路径/文件} {本地路径}</li>
+<li>xshell上传文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//远端需要安装一个软件</div><div class="line">yum install lrzsz</div><div class="line">rz //弹出弹窗，选择文件就能实现上传</div><div class="line">sz &#123;文件名&#125; //下载</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-01-10T02:16:29.494Z" itemprop="dateUpdated">2018-01-10 10:16:29</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/12/Web性能优化/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Web性能优化</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
