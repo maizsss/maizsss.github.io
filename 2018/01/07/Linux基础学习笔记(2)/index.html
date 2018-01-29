@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Linux基础学习笔记(2) | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="WebServerApache基本 安装： yum install httpd 启动：service httpd start 停止：service httpd stop 看进程：ps -ef | grep httpd 网络统计：sudu netstat -anpl | grep ‘http’ 虚拟主机配置  12345678910111213// 编辑配置需要先提权vim /etc/httpd/c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础学习笔记(2)">
+<meta property="og:url" content="http://maizsss.github.io/2018/01/07/Linux基础学习笔记(2)/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="WebServerApache基本 安装： yum install httpd 启动：service httpd start 停止：service httpd stop 看进程：ps -ef | grep httpd 网络统计：sudu netstat -anpl | grep ‘http’ 虚拟主机配置  12345678910111213// 编辑配置需要先提权vim /etc/httpd/c">
+<meta property="og:updated_time" content="2018-01-29T06:46:09.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux基础学习笔记(2)">
+<meta name="twitter:description" content="WebServerApache基本 安装： yum install httpd 启动：service httpd start 停止：service httpd stop 看进程：ps -ef | grep httpd 网络统计：sudu netstat -anpl | grep ‘http’ 虚拟主机配置  12345678910111213// 编辑配置需要先提权vim /etc/httpd/c">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux基础学习笔记(2)</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux基础学习笔记(2)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-07T10:30:15.000Z" itemprop="datePublished" class="page-time">
+  2018-01-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WebServer"><span class="post-toc-text">WebServer</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Apache"><span class="post-toc-text">Apache</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#基本"><span class="post-toc-text">基本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#虚拟主机配置"><span class="post-toc-text">虚拟主机配置</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#伪静态"><span class="post-toc-text">伪静态</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Nginx"><span class="post-toc-text">Nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#基本操作"><span class="post-toc-text">基本操作</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#虚拟主机"><span class="post-toc-text">虚拟主机</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缓存服务"><span class="post-toc-text">缓存服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#memcached"><span class="post-toc-text">memcached</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#redis"><span class="post-toc-text">redis</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用服务"><span class="post-toc-text">常用服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#crontab-定时任务"><span class="post-toc-text">crontab 定时任务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ntpdate-日期同步"><span class="post-toc-text">Ntpdate 日期同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Logrotate-日志切割"><span class="post-toc-text">Logrotate 日志切割</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#supervisor-进程管理"><span class="post-toc-text">supervisor 进程管理</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#shell"><span class="post-toc-text">shell</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#别名"><span class="post-toc-text">别名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用快捷键"><span class="post-toc-text">常用快捷键</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Linux基础学习笔记(2)"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux基础学习笔记(2)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-07 18:30:15" datetime="2018-01-07T10:30:15.000Z"  itemprop="datePublished">2018-01-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="WebServer"><a href="#WebServer" class="headerlink" title="WebServer"></a>WebServer</h2><h4 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h4><h5 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h5><ul>
+<li>安装： yum install httpd</li>
+<li>启动：service httpd start</li>
+<li>停止：service httpd stop</li>
+<li>看进程：ps -ef | grep httpd</li>
+<li>网络统计：sudu netstat -anpl | grep ‘http’</li>
+<li><h5 id="虚拟主机配置"><a href="#虚拟主机配置" class="headerlink" title="虚拟主机配置"></a>虚拟主机配置</h5></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 编辑配置需要先提权</div><div class="line">vim /etc/httpd/conf/httpd.conf</div><div class="line">// 编写内容</div><div class="line">&lt;VirtualHost *:80&gt;</div><div class="line">    ServerName &#123;域名&#125;</div><div class="line">    DocumentRoot &#123;根路径&#125;</div><div class="line">    &lt;Directory &quot;&#123;根路径&#125;&quot;&gt;</div><div class="line">        Options Indexed FollowSymLinks</div><div class="line">        AllowOverride none</div><div class="line">        Require all granted</div><div class="line">    &lt;/Directory&gt;</div><div class="line">&lt;/VirtualHost&gt;</div><div class="line">// 保存重启</div></pre></td></tr></table></figure>
+<ul>
+<li>把某个文件为帐号提权：sudo chown -R {帐号}:{帐号} {目录}</li>
+<li>开启宽松模式：sudo setenforce 0 or vim /etc/selinux/config</li>
+</ul>
+<h5 id="伪静态"><a href="#伪静态" class="headerlink" title="伪静态"></a>伪静态</h5><ul>
+<li>模块配置文件目录：/etc/httpd/conf.modules.d/</li>
+<li>模块目录：/etc/httpd/modules/</li>
+<li>配置伪静态：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">vim /etc/httpd/conf/httpd.conf</div><div class="line"></div><div class="line">// 把伪静态加载</div><div class="line">LoadModule rewrite_module modules/mod_rewrite.so</div><div class="line">// 修改虚拟主机内容</div><div class="line">&lt;VirtualHost *:80&gt;</div><div class="line">    ServerName &#123;域名&#125;</div><div class="line">    DocumentRoot &#123;根路径&#125;</div><div class="line">    &lt;Directory &quot;&#123;根路径&#125;&quot;&gt;</div><div class="line">        Options Indexed FollowSymLinks</div><div class="line">        AllowOverride none</div><div class="line">        Require all granted</div><div class="line">        // 加入以下内容</div><div class="line">        &lt;IfModule mod_rewrite.c&gt;</div><div class="line">            RewriteEngine On</div><div class="line">            RewriteRule ^(.*).htmp$ index.html</div><div class="line">        &lt;/IfModule&gt;</div><div class="line">    &lt;/Directory&gt;</div><div class="line">&lt;/VirtualHost&gt;</div><div class="line">// 保存重启</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 搜索，yum源没有nginx源</div><div class="line">yum search nginx</div><div class="line">// 添加CentOS 7 Nginx yum资源库</div><div class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</div><div class="line">sudo yum install -y nginx</div></pre></td></tr></table></figure>
+<h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
+<li>安装：yum install nginx</li>
+<li>启动：service nginx start</li>
+<li>停止：service nginx stop</li>
+<li>重载：service nginx reload(无缝重载)</li>
+<li>先杀死再启动：service nginx restart<h5 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a>虚拟主机</h5></li>
+<li><p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/conf.d/&#123;配置名&#125;.conf</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>伪静态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        rewrite ^(.*)\.htmp$ /index.html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>日志（搜索nignx log_format学习日志配置）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/nginx.conf</div><div class="line"></div><div class="line">log_format &#123;日志格式名&#125; &#123;格式&#125;</div><div class="line">access_log &#123;日志路径&#125; &#123;日志格式名&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>反向代理（用户请求到A机器的nginx，nginx再请求B、C机器服务，再返回给用户）</p>
+</li>
+<li><p>负载均衡（N台机器同时接受请求）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">upstream &#123;服务名称&#125; &#123;</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=5; // 服务1</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=1; //服务2</div><div class="line">    // weight设置权重</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        proxy_set_header Host &#123;域名&#125;;</div><div class="line">        proxy_pass http://&#123;服务名&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>调试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">upstream &#123;服务名称&#125; &#123;</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=5; // 服务1</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=1; //服务2</div><div class="line">    // weight设置权重</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    add_header Content-Type &quot;text/plain chatset=utf-8&quot;; //设置header</div><div class="line">    return 200 &quot;$http_host&quot;; // 直接返回给浏览器</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        proxy_set_header Host &#123;域名&#125;;</div><div class="line">        proxy_pass http://&#123;服务名&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="缓存服务"><a href="#缓存服务" class="headerlink" title="缓存服务"></a>缓存服务</h2><h3 id="memcached"><a href="#memcached" class="headerlink" title="memcached"></a>memcached</h3><ul>
+<li>安装：yum install memcached</li>
+<li><p>启动：memcached -d -l -m -p</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 查看网络服务</div><div class="line">netstat -anpl | grep memcached</div><div class="line">// 查看端口是否通,还能发送报文</div><div class="line">// 先安装</div><div class="line">yum install telnet.*</div><div class="line">telnet 127.0.0.1 11211</div><div class="line">// quit 退出</div></pre></td></tr></table></figure>
+</li>
+<li><p>停止：kill {pid}</p>
+</li>
+</ul>
+<h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h3><ul>
+<li><p>安装：源码编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 下载</div><div class="line">wget http://download.redis.io/releases/redis-4.0.2.tar.gz</div><div class="line">// 解压</div><div class="line">tar xvfz redis-4.0.2.tar.gz</div><div class="line">cd redis-4.0.2</div><div class="line">// 查看安装说明</div><div class="line">cat INSTALL</div><div class="line">cat README.md</div><div class="line">// 编译</div><div class="line">// 需要先安装gcc</div><div class="line">yum install gcc</div><div class="line">make MALLOC=libc</div><div class="line">// 安装</div><div class="line">make install</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动：./src/redis-server start/restart</p>
+</li>
+<li>停止：./src/redis-server top</li>
+<li>客户端：./src/redis-client(cli)<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set &#123;key&#125; &#123;value&#125;</div><div class="line">get &#123;key&#125;</div><div class="line">del &#123;key&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">telnet &#123;host&#125; 6379</div><div class="line">// 需要先 </div><div class="line">CONFIG SET protected-mode no</div></pre></td></tr></table></figure>
+<ul>
+<li><p>LPUSH</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//push</div><div class="line">LPUSH tmp_list item1</div><div class="line">LPUSH tmp_list item2</div><div class="line">LPUSH tmp_list item3</div><div class="line">//range</div><div class="line">LRANGE tmp_list 0 10</div></pre></td></tr></table></figure>
+</li>
+<li><p>redis 菜鸟教程：<a href="http://www.runoob.com/redis/redis-commands.html" target="_blank" rel="external">http://www.runoob.com/redis/redis-commands.html</a></p>
+</li>
+</ul>
+<h2 id="常用服务"><a href="#常用服务" class="headerlink" title="常用服务"></a>常用服务</h2><h3 id="crontab-定时任务"><a href="#crontab-定时任务" class="headerlink" title="crontab 定时任务"></a>crontab 定时任务</h3><ul>
+<li>配置任务：crontab -e</li>
+<li>教程： <a href="https://www.cnblogs.com/intval/p/5763929.html" target="_blank" rel="external">https://www.cnblogs.com/intval/p/5763929.html</a></li>
+</ul>
+<h3 id="Ntpdate-日期同步"><a href="#Ntpdate-日期同步" class="headerlink" title="Ntpdate 日期同步"></a>Ntpdate 日期同步</h3><ul>
+<li>安装： yum install ntpdate</li>
+<li>同步时间：ntpdate cn.pool.ntp.org</li>
+<li>改时区<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//删除原时区</div><div class="line">rm /etc/localtime</div><div class="line">// 设置东八区时区</div><div class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Logrotate-日志切割"><a href="#Logrotate-日志切割" class="headerlink" title="Logrotate 日志切割"></a>Logrotate 日志切割</h3><ul>
+<li>教程： <a href="https://linux.cn/article-4126-1.html" target="_blank" rel="external">https://linux.cn/article-4126-1.html</a></li>
+</ul>
+<h3 id="supervisor-进程管理"><a href="#supervisor-进程管理" class="headerlink" title="supervisor 进程管理"></a>supervisor 进程管理</h3><ul>
+<li>教程：<a href="http://blog.csdn.net/xyang81/article/details/51555473" target="_blank" rel="external">http://blog.csdn.net/xyang81/article/details/51555473</a></li>
+</ul>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><ul>
+<li><p>简介</p>
+<blockquote>
+<p>Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。<br>Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。<br>Ken Thompson 的 sh 是第一种 Unix Shell，Windows Explorer 是一个典型的图形界面 Shell。</p>
+</blockquote>
+</li>
+<li><p>Shell 脚本</p>
+<blockquote>
+<p>Shell 脚本（shell script），是一种为 shell 编写的脚本程序。<br>业界所说的 shell 通常都是指 shell 脚本，但读者朋友要知道，shell 和 shell script 是两个不同的概念。<br>由于习惯的原因，简洁起见，本文出现的 “shell编程” 都是指 shell 脚本编程，不是指开发 shell 自身。</p>
+</blockquote>
+</li>
+<li><p>查看当前发行版可以使用的shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cat /etc/shells </div><div class="line">// 输出</div><div class="line">/bin/sh</div><div class="line">/bin/bash</div><div class="line">/sbin/nologin</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前使用的shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo $SHELL</div><div class="line">// 输出</div><div class="line">/bin/bash</div></pre></td></tr></table></figure>
+</li>
+<li><p>教程：<a href="http://www.runoob.com/linux/linux-shell.html" target="_blank" rel="external">http://www.runoob.com/linux/linux-shell.html</a></p>
+</li>
+</ul>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><ul>
+<li>查看别名: alias</li>
+<li>设置别名：alias {别名}=’{原命令}’</li>
+<li><p>永久生效：vi ~/.bashrc(写入环境变量配置文件)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 使配置生效</div><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除别名：unalias {别名}</p>
+</li>
+</ul>
+<h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><ul>
+<li>退出：ctrl+c</li>
+<li>清屏：ctrl+l</li>
+<li>光标移动到命令行首：ctrl+a</li>
+<li>光标移动到行尾：ctrl+e</li>
+<li>从光标所在位置删除到行首：ctrl+u</li>
+<li>把命令放入后台：ctrl+z</li>
+<li>在历史命令中搜索：ctrl+r</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-01-29T06:46:09.432Z" itemprop="dateUpdated">2018-01-29 14:46:09</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/01/07/mongodb学习笔记/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mongodb学习笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/07/Linux基础学习笔记(1)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux基础学习笔记(1)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

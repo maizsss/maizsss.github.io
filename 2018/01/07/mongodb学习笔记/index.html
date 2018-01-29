@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>mongodb学习笔记 | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="安装下载1wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.0.tgz 解压安装配置1234567891011121314151617181920212223242526272829303132333435/**  解压  **/tar zxvf mongodb-linux-x86_64-3.4.0.tgz/** 重命名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodb学习笔记">
+<meta property="og:url" content="http://maizsss.github.io/2018/01/07/mongodb学习笔记/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="安装下载1wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.0.tgz 解压安装配置1234567891011121314151617181920212223242526272829303132333435/**  解压  **/tar zxvf mongodb-linux-x86_64-3.4.0.tgz/** 重命名">
+<meta property="og:updated_time" content="2018-01-29T06:41:18.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongodb学习笔记">
+<meta name="twitter:description" content="安装下载1wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.0.tgz 解压安装配置1234567891011121314151617181920212223242526272829303132333435/**  解压  **/tar zxvf mongodb-linux-x86_64-3.4.0.tgz/** 重命名">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mongodb学习笔记</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mongodb学习笔记</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-07T10:31:29.000Z" itemprop="datePublished" class="page-time">
+  2018-01-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载"><span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解压安装配置"><span class="post-toc-text">解压安装配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运行"><span class="post-toc-text">运行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户权限"><span class="post-toc-text">用户权限</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#命令"><span class="post-toc-text">命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连接"><span class="post-toc-text">连接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据库导出导入"><span class="post-toc-text">数据库导出导入</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mongodb学习笔记"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mongodb学习笔记</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-07 18:31:29" datetime="2018-01-07T10:31:29.000Z"  itemprop="datePublished">2018-01-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.0.tgz</div></pre></td></tr></table></figure>
+<h3 id="解压安装配置"><a href="#解压安装配置" class="headerlink" title="解压安装配置"></a>解压安装配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/**  解压  **/</div><div class="line">tar zxvf mongodb-linux-x86_64-3.4.0.tgz</div><div class="line"></div><div class="line">/** 重命名 **/</div><div class="line">mv mongodb-linux-x86_64-3.4.0.tgz mongodb</div><div class="line"></div><div class="line">/** 进入mongodb目录 **/</div><div class="line">cd mongodb</div><div class="line"></div><div class="line">/** 创建db和日志目录 **/</div><div class="line">mkdir /opt/mongodb/data </div><div class="line">mkdir /opt/mongodb/data/db</div><div class="line">mkdir /opt/mongodb/data/logs</div><div class="line">/** logs目录下创建mongodb.log文件 **/</div><div class="line">touch mongodb.log</div><div class="line"></div><div class="line">/** 在mongodb/data目中创建mongodb.conf **/</div><div class="line">cd data</div><div class="line">vi mongodb.conf</div><div class="line"></div><div class="line">/** 加入相关配置 **/</div><div class="line">#端口号</div><div class="line">port = 27017 </div><div class="line">#数据目录</div><div class="line">dbpath = /opt/mongodb/data/db</div><div class="line">#日志目录</div><div class="line">logpath = /opt/mongodb/data/logs/mongodb.log</div><div class="line">#设置后台运行</div><div class="line">fork = true</div><div class="line">#日志输出方式</div><div class="line">logappend = true</div><div class="line">#开启认证</div><div class="line">#auth = true</div><div class="line"></div><div class="line">/** esc :wq 保存退出 **/</div></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/mongodb/bin/mongod --config /opt/mongodb/data/mongodb.conf</div></pre></td></tr></table></figure>
+<h3 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h3><ul>
+<li>教程： <a href="http://blog.csdn.net/dbabruce/article/details/50963956" target="_blank" rel="external">http://blog.csdn.net/dbabruce/article/details/50963956</a></li>
+<li><p>创建用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use admin</div><div class="line">db.createUser(&#123;</div><div class="line">    user:&apos;&#123;用户名&#125;&apos;,</div><div class="line">    pwd:&apos;&#123;用户密码&#125;&apos;,</div><div class="line">    roles:[&#123; &quot;role&quot; : &quot;&#123;角色&#125;&quot;, &quot;db&quot; : &quot;&#123;库名&#125;&quot; &#125;]</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>内置角色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">数据库用户类：</div><div class="line">read 非系统集合有查询权限</div><div class="line">readWrite 非系统集合有查询和修改权限</div><div class="line"></div><div class="line">数据库管理类：</div><div class="line">dbAdmin 数据库管理相关，比如索引管理，schema管理，统计收集等，不包括用户和角色管理</div><div class="line">dbOwner 提供数据库管理，读写权限，用户和角色管理相关功能</div><div class="line">userAdmin 提供数据库用户和角色管理相关功能</div><div class="line"></div><div class="line">集群管理类：</div><div class="line">clusterAdmin 提供最大集群管理权限</div><div class="line">clusterManager 提供集群管理和监控权限</div><div class="line">clusterMonitor 提供对监控工具只读权限</div><div class="line">hostManager 提供监控和管理severs权限</div><div class="line"></div><div class="line">备份和恢复类：</div><div class="line">backup 提供数据库备份权限</div><div class="line">restore 提供数据恢复权限</div><div class="line"></div><div class="line">All-Database类：</div><div class="line">readAnyDatabase 提供读取所有数据库的权限除了local和config数据库之外</div><div class="line">readWriteAnyDatabase 和readAnyDatabase一样，除了增加了写权限</div><div class="line">userAdminAnyDatabase 管理用户所有数据库权限，单个数据库权限和userAdmin角色一样</div><div class="line">dbAdminAnyDatabase 提供所有用户管理权限，除了local,config</div><div class="line"></div><div class="line">超级用户类：</div><div class="line">root 数据库所有权限</div><div class="line"></div><div class="line">内部角色：</div><div class="line">__system 提供数据库所有对象任何操作的权限，不能分配给用户，非常危险</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul>
+<li>教程： <a href="https://www.cnblogs.com/PheonixHkbxoic/p/5665499.html" target="_blank" rel="external">https://www.cnblogs.com/PheonixHkbxoic/p/5665499.html</a></li>
+<li><p>关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 开启mongo命令行</div><div class="line">./bin/mongo</div><div class="line">// 使用admin权限</div><div class="line">use admin</div><div class="line">// 关闭服务,不kill进程</div><div class="line">db.shutdownServer()</div><div class="line"></div><div class="line">// 关闭进程</div><div class="line">mongod --shutdown --dbpath /opt/mongodb/data/db</div></pre></td></tr></table></figure>
+</li>
+<li><p>db的帮助</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">db.changeUserPassword(username,password);  修改用户密码 </div><div class="line">db.auth(usrename,password)     设置数据库连接验证  </div><div class="line">db.cloneDataBase(fromhost)     从目标服务器克隆一个数据库  </div><div class="line">db.commandHelp(name)           returns the help for the command  </div><div class="line">db.copyDatabase(fromdb,todb,fromhost)  复制数据库fromdb---源数据库名称，todb---目标数据库名称，fromhost---源数据库服务器地址  </div><div class="line">db.createCollection(name,&#123;size:3333,capped:333,max:88888&#125;)  创建一个数据集，相当于一个表  </div><div class="line">db.currentOp()                 取消当前库的当前操作  </div><div class="line">db.dropDataBase()              删除当前数据库  </div><div class="line">db.eval(func,args)             run code server-side  </div><div class="line">db.getCollection(cname)        取得一个数据集合，同用法：db[&apos;cname&apos;] or  </div><div class="line">db.getCollenctionNames()       取得所有数据集合的名称列表  </div><div class="line">db.getLastError()              返回最后一个错误的提示消息  </div><div class="line">db.getLastErrorObj()           返回最后一个错误的对象  </div><div class="line">db.getMongo()                  取得当前服务器的连接对象get the server  </div><div class="line">db.getMondo().setSlaveOk()     allow this connection to read from then nonmaster membr of a replica pair  </div><div class="line">db.getName()                   返回当操作数据库的名称  </div><div class="line">db.getPrevError()              返回上一个错误对象  </div><div class="line">db.getProfilingLevel()         获取profile level  </div><div class="line">db.getReplicationInfo()        获得重复的数据  </div><div class="line">db.getSisterDB(name)           get the db at the same server as this onew  </div><div class="line">db.killOp()                    停止（杀死）在当前库的当前操作  </div><div class="line">db.printCollectionStats()      返回当前库的数据集状态  </div><div class="line">db.printReplicationInfo()        打印主数据库的复制状态信息  </div><div class="line">db.printSlaveReplicationInfo()        打印从数据库的复制状态信息  </div><div class="line">db.printShardingStatus()       返回当前数据库是否为共享数据库  </div><div class="line">db.removeUser(username)        删除用户  </div><div class="line">db.repairDatabase()            修复当前数据库  </div><div class="line">db.resetError()  </div><div class="line">db.runCommand(cmdObj)          run a database command. if cmdObj is a string, turns it into &#123;cmdObj:1&#125;  </div><div class="line">db.setProfilingLevel(level)    设置profile level 0=off,1=slow,2=all  </div><div class="line">db.shutdownServer()            关闭当前服务程序  </div><div class="line">db.version()                   返回当前程序的版本信息</div></pre></td></tr></table></figure>
+</li>
+<li><p>表的帮助，格式，db.表名.help()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">db.test.find(&#123;id:10&#125;)          返回test数据集ID=10的数据集  </div><div class="line">db.test.find(&#123;id:10&#125;).count()  返回test数据集ID=10的数据总数  </div><div class="line">db.test.find(&#123;id:10&#125;).limit(2) 返回test数据集ID=10的数据集从第二条开始的数据集  </div><div class="line">db.test.find(&#123;id:10&#125;).skip(8)  返回test数据集ID=10的数据集从0到第八条的数据集  </div><div class="line">db.test.find(&#123;id:10&#125;).limit(2).skip(8)  返回test数据集ID=1=的数据集从第二条到第八条的数据  </div><div class="line">db.test.find(&#123;id:10&#125;).sort()   返回test数据集ID=10的排序数据集  </div><div class="line">db.test.findOne([query])       返回符合条件的一条数据  </div><div class="line">db.test.getDB()                返回此数据集所属的数据库名称  </div><div class="line">db.test.getIndexes()           返回些数据集的索引信息  </div><div class="line">db.test.group(&#123;key:...,initial:...,reduce:...[,cond:...]&#125;)    返回分组信息  </div><div class="line">db.test.mapReduce(mayFunction,reduceFunction,&lt;optional params&gt;)  这个有点像存储过程  </div><div class="line">db.test.remove(query)                      在数据集中删除一条数据  </div><div class="line">db.test.renameCollection(newName)          重命名些数据集名称  </div><div class="line">db.test.save(obj)                          往数据集中插入一条数据  </div><div class="line">db.test.stats()                            返回此数据集的状态  </div><div class="line">db.test.storageSize()                      返回此数据集的存储大小  </div><div class="line">db.test.totalIndexSize()                   返回此数据集的索引文件大小  </div><div class="line">db.test.totalSize()                        返回些数据集的总大小  </div><div class="line">db.test.update(query,object[,upsert_bool]) 在此数据集中更新一条数据  </div><div class="line">db.test.validate()                         验证此数据集  </div><div class="line">db.test.getShardVersion()                  返回数据集共享版本号</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongodb://&#123;user&#125;:&#123;password&#125;@&#123;ip&#125;:&#123;port&#125;/&#123;dbname&#125;</div></pre></td></tr></table></figure>
+<h3 id="数据库导出导入"><a href="#数据库导出导入" class="headerlink" title="数据库导出导入"></a>数据库导出导入</h3><ul>
+<li><p>导出：mongoexport</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mongoexport -d dbname -c collectionname -o file --type json/csv -f field</div><div class="line">    参数说明：</div><div class="line">        -d ：数据库名</div><div class="line">        -c ：collection名</div><div class="line">        -o ：输出的文件名</div><div class="line">        --type ： 输出的格式，默认为json</div><div class="line">        -f ：输出的字段，如果-type为csv，则需要加上-f &quot;字段名&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>导入：mongoimport</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field</div><div class="line">    参数说明：</div><div class="line">        -h [ --host ] arg       mongo host to connect to ( &lt;set name&gt;/s1,s2 for sets)  </div><div class="line">        --port arg              server port. Can also use --host hostname:port   </div><div class="line">        -u [ --username ] arg   username  </div><div class="line">        -p [ --password ] arg   password  </div><div class="line">        -d ：数据库名</div><div class="line">        -c ：collection名</div><div class="line">        --type ：导入的格式默认json</div><div class="line">        -f ：导入的字段名</div><div class="line">        --headerline ：如果导入的格式是csv，则可以使用第一行的标题作为导入的字段</div><div class="line">        --file ：要导入的文件</div></pre></td></tr></table></figure>
+</li>
+<li><p>tips，下载远程文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp &#123;用户名&#125;@&#123;ip&#125;:&#123;路径/文件&#125; &#123;本地路径&#125;</div></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-01-29T06:41:18.885Z" itemprop="dateUpdated">2018-01-29 14:41:18</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/07/Linux基础学习笔记(2)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux基础学习笔记(2)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
