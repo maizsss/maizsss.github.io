@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="maizsss blog">
 <meta property="og:description" content="背景：当你做了一个nodejs+mongodb的项目，然后拿到了linux云主机的ip与root密码，接着要如何完成一系列的部署工作。  linux用户权限 因为root账户具有系统最高权限，如果进行了误操作或者泄露了，后果会很严重。所以一般会根据不同的操作内容建立多个非root账户，分配不同的权限。 linux的权限系统还有文件权限、用户组、提权这样的概念，理解了linux的权限系统可以更自如">
 <meta property="og:image" content="http://7xpsli.com1.z0.glb.clouddn.com/linux_deploy_pic1.png">
-<meta property="og:updated_time" content="2018-03-07T12:44:50.830Z">
+<meta property="og:updated_time" content="2018-03-07T12:50:31.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在linux环境部署nodejs项目">
 <meta name="twitter:description" content="背景：当你做了一个nodejs+mongodb的项目，然后拿到了linux云主机的ip与root密码，接着要如何完成一系列的部署工作。  linux用户权限 因为root账户具有系统最高权限，如果进行了误操作或者泄露了，后果会很严重。所以一般会根据不同的操作内容建立多个非root账户，分配不同的权限。 linux的权限系统还有文件权限、用户组、提权这样的概念，理解了linux的权限系统可以更自如">
@@ -230,15 +230,15 @@
 </ul>
 <h1 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h1><blockquote>
 <p>linux环境安装软件的工作一般是运维人员处理好，而针对单个项目的部署才是开发者需要做的。</p>
+</blockquote>
 <h2 id="在git项目开启ssh秘钥"><a href="#在git项目开启ssh秘钥" class="headerlink" title="在git项目开启ssh秘钥"></a>在git项目开启ssh秘钥</h2><ul>
 <li>以gitlab为例，如果之前已经添加过服务器的密钥，那只需要在项目的“设置”下拉菜单中，进入“部署密钥”，然后在里面找到需要部署项目的服务器的密钥，点击“启用”就能以ssh方式拉取项目。<h2 id="运行nodejs实例"><a href="#运行nodejs实例" class="headerlink" title="运行nodejs实例"></a>运行nodejs实例</h2></li>
 <li>主流做法是用pm2启动：参考上一节pm2的说明。</li>
-<li>用nohub启动:nohup是linux环境的软件，能让进程在后台运行。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup node app.js &amp;</div></pre></td></tr></table></figure>
+<li><p>用nohub启动:nohup是linux环境的软件，能让进程在后台运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup node app.js &amp;</div></pre></td></tr></table></figure>
 </li>
-</ul>
-</blockquote>
-<ul>
-<li>用forever启动：具体参考（<a href="https://github.com/foreverjs/forever）" target="_blank" rel="external">https://github.com/foreverjs/forever）</a><h2 id="做nginx配置"><a href="#做nginx配置" class="headerlink" title="做nginx配置"></a>做nginx配置</h2></li>
+<li><p>用forever启动：具体参考（<a href="https://github.com/foreverjs/forever）" target="_blank" rel="external">https://github.com/foreverjs/forever）</a></p>
+<h2 id="做nginx配置"><a href="#做nginx配置" class="headerlink" title="做nginx配置"></a>做nginx配置</h2></li>
 <li>nginx的说明参考上一节，或：<a href="http://www.nginx.cn/doc/" target="_blank" rel="external">http://www.nginx.cn/doc/</a></li>
 <li>nginx本身是一个性能优秀的web服务器，用于代理静态资源是很方便的。对于nodejs服务，能解决前后端分离的跨域问题，也能实现负载均衡。<h2 id="防火墙通行端口"><a href="#防火墙通行端口" class="headerlink" title="防火墙通行端口"></a>防火墙通行端口</h2></li>
 <li>假如nginx配置了虚拟主机占用8000端口，然后在本机curl <a href="http://localhost:8000是有响应的，但在其他机器上面访问却无响应。这时候可能是因为服务器开了防火墙而8000端口没被放行。" target="_blank" rel="external">http://localhost:8000是有响应的，但在其他机器上面访问却无响应。这时候可能是因为服务器开了防火墙而8000端口没被放行。</a></li>
@@ -252,7 +252,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-03-07T12:44:50.830Z" itemprop="dateUpdated">2018-03-07 20:44:50</time>
+    最后更新时间：<time datetime="2018-03-07T12:50:31.889Z" itemprop="dateUpdated">2018-03-07 20:50:31</time>
 </span><br>
 
 
@@ -329,7 +329,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
         </p>
     </div> -->
     <div class="bottom">
