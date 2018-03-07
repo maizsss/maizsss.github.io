@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>在linux环境部署nodejs项目 | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="背景：当你做了一个nodejs+mongodb的项目，然后拿到了linux云主机的ip与root密码，接着要如何完成一系列的部署工作。  linux用户权限 因为root账户具有系统最高权限，如果进行了误操作或者泄露了，后果会很严重。所以一般会根据不同的操作内容建立多个非root账户，分配不同的权限。 linux的权限系统还有文件权限、用户组、提权这样的概念，理解了linux的权限系统可以更自如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在linux环境部署nodejs项目">
+<meta property="og:url" content="http://maizsss.github.io/2018/03/07/在linux环境部署nodejs项目/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="背景：当你做了一个nodejs+mongodb的项目，然后拿到了linux云主机的ip与root密码，接着要如何完成一系列的部署工作。  linux用户权限 因为root账户具有系统最高权限，如果进行了误操作或者泄露了，后果会很严重。所以一般会根据不同的操作内容建立多个非root账户，分配不同的权限。 linux的权限系统还有文件权限、用户组、提权这样的概念，理解了linux的权限系统可以更自如">
+<meta property="og:image" content="http://7xpsli.com1.z0.glb.clouddn.com/linux_deploy_pic1.png">
+<meta property="og:updated_time" content="2018-03-07T12:44:50.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在linux环境部署nodejs项目">
+<meta name="twitter:description" content="背景：当你做了一个nodejs+mongodb的项目，然后拿到了linux云主机的ip与root密码，接着要如何完成一系列的部署工作。  linux用户权限 因为root账户具有系统最高权限，如果进行了误操作或者泄露了，后果会很严重。所以一般会根据不同的操作内容建立多个非root账户，分配不同的权限。 linux的权限系统还有文件权限、用户组、提权这样的概念，理解了linux的权限系统可以更自如">
+<meta name="twitter:image" content="http://7xpsli.com1.z0.glb.clouddn.com/linux_deploy_pic1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在linux环境部署nodejs项目</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在linux环境部署nodejs项目</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-07T12:44:34.000Z" itemprop="datePublished" class="page-time">
+  2018-03-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux用户权限"><span class="post-toc-text">linux用户权限</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统构成"><span class="post-toc-text">系统构成</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#软件环境准备"><span class="post-toc-text">软件环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装nodejs"><span class="post-toc-text">安装nodejs</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装git"><span class="post-toc-text">安装git</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置sshkey"><span class="post-toc-text">设置sshkey</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装mongodb"><span class="post-toc-text">安装mongodb</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Nginx"><span class="post-toc-text">Nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#基本操作"><span class="post-toc-text">基本操作</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#虚拟主机"><span class="post-toc-text">虚拟主机</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PM2：nodejs的守护进程工具"><span class="post-toc-text">PM2：nodejs的守护进程工具</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目部署"><span class="post-toc-text">项目部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在git项目开启ssh秘钥"><span class="post-toc-text">在git项目开启ssh秘钥</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#运行nodejs实例"><span class="post-toc-text">运行nodejs实例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#做nginx配置"><span class="post-toc-text">做nginx配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#防火墙通行端口"><span class="post-toc-text">防火墙通行端口</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-在linux环境部署nodejs项目"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在linux环境部署nodejs项目</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-07 20:44:34" datetime="2018-03-07T12:44:34.000Z"  itemprop="datePublished">2018-03-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>背景：当你做了一个nodejs+mongodb的项目，然后拿到了linux云主机的ip与root密码，接着要如何完成一系列的部署工作。</p>
+</blockquote>
+<h2 id="linux用户权限"><a href="#linux用户权限" class="headerlink" title="linux用户权限"></a>linux用户权限</h2><ul>
+<li>因为root账户具有系统最高权限，如果进行了误操作或者泄露了，后果会很严重。所以一般会根据不同的操作内容建立多个非root账户，分配不同的权限。</li>
+<li>linux的权限系统还有文件权限、用户组、提权这样的概念，理解了linux的权限系统可以更自如地进行操作和定位问题，具体可以参考文章来了解： <a href="https://www.cnblogs.com/duhuo/p/5892513.html" target="_blank" rel="external">https://www.cnblogs.com/duhuo/p/5892513.html</a></li>
+</ul>
+<h2 id="系统构成"><a href="#系统构成" class="headerlink" title="系统构成"></a>系统构成</h2><ul>
+<li>简单描绘一个基本的系统架构<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xpsli.com1.z0.glb.clouddn.com/linux_deploy_pic1.png" alt="image" title="">
+                </div>
+                <div class="image-caption">image</div>
+            </figure>
+</li>
+</ul>
+<h1 id="软件环境准备"><a href="#软件环境准备" class="headerlink" title="软件环境准备"></a>软件环境准备</h1><h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><ul>
+<li><p>使用nvm管理nodejs版本。nvm方便在同一台机器安装不同版本nodejs，而且可以在不同版本之间进行切换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | bash</div><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装node 8.9.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm install v8.9.0</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><blockquote>
+<p>使用编译安装方式，可以安装较新版本的git</p>
+<ul>
+<li>安装依赖的包<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>下载git源码并解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/git/git/archive/v2.3.0.zip</div><div class="line">unzip v2.3.0.zip</div><div class="line">cd git-2.3.0</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">make prefix=/usr/local/git all</div><div class="line">make prefix=/usr/local/git install</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 查看git路径</div><div class="line">whereis git</div><div class="line">vim ~/.bashrc</div><div class="line">// 在文件的最后一行，添加下面的内容，然后保存退出。</div><div class="line">export PATH=/usr/local/git/bin:$PATH</div><div class="line">// 使配置即时生效</div><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="设置sshkey"><a href="#设置sshkey" class="headerlink" title="设置sshkey"></a>设置sshkey</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 在linux服务端生成sshkey</div><div class="line">ssh-keygen -t rsa -C &quot;你的账号&quot;</div><div class="line">// 生成过程按回车，以默认值即可</div><div class="line">// 最终生成在~/.ssh/id_rsa(私钥)  ~/.ssh/id_rsa.pub(公钥)</div><div class="line">// 复制公钥的值</div><div class="line">cat ~/.ssh/id_rsa.pub</div><div class="line">// 在gitlab部署密钥处，添加新的公钥。</div><div class="line">// 以ssh方式拉取项目：git clone git@XXXXX</div></pre></td></tr></table></figure>
+<h2 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h2><ul>
+<li><a href="https://maizsss.github.io/2018/01/07/mongodb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://maizsss.github.io/2018/01/07/mongodb%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a><h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 搜索，yum源没有nginx源</div><div class="line">yum search nginx</div><div class="line">// 添加CentOS 7 Nginx yum资源库</div><div class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</div><div class="line">sudo yum install -y nginx</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h5><ul>
+<li>安装：yum install nginx</li>
+<li>启动：service nginx start</li>
+<li>停止：service nginx stop</li>
+<li>重载：service nginx reload(无缝重载)</li>
+<li>先杀死再启动：service nginx restart<h5 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a>虚拟主机</h5></li>
+<li><p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/conf.d/&#123;配置名&#125;.conf</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>伪静态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        rewrite ^(.*)\.htmp$ /index.html;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>日志（搜索nignx log_format学习日志配置）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/nginx.conf</div><div class="line"></div><div class="line">log_format &#123;日志格式名&#125; &#123;格式&#125;</div><div class="line">access_log &#123;日志路径&#125; &#123;日志格式名&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>反向代理（用户请求到A机器的nginx，nginx再请求B、C机器服务，再返回给用户）</p>
+</li>
+<li><p>负载均衡（N台机器同时接受请求）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">upstream &#123;服务名称&#125; &#123;</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=5; // 服务1</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=1; //服务2</div><div class="line">    // weight设置权重</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        proxy_set_header Host &#123;域名&#125;;</div><div class="line">        proxy_pass http://&#123;服务名&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>调试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">upstream &#123;服务名称&#125; &#123;</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=5; // 服务1</div><div class="line">    server &#123;ip&#125;:&#123;port&#125; weight=1; //服务2</div><div class="line">    // weight设置权重</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    listen 9999;</div><div class="line">    add_header Content-Type &quot;text/plain chatset=utf-8&quot;; //设置header</div><div class="line">    return 200 &quot;$http_host&quot;; // 直接返回给浏览器</div><div class="line">    server_name &#123;域名1&#125; &#123;域名2&#125;;</div><div class="line">    root &#123;根路径&#125;;</div><div class="line">    index index.html index.htm;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        proxy_set_header Host &#123;域名&#125;;</div><div class="line">        proxy_pass http://&#123;服务名&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="PM2：nodejs的守护进程工具"><a href="#PM2：nodejs的守护进程工具" class="headerlink" title="PM2：nodejs的守护进程工具"></a>PM2：nodejs的守护进程工具</h2><ul>
+<li><p>安装,pm2是npm包，可以直接用npm全局安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i pm2 -g</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pm2 start app.js</div><div class="line">// 查看参数说明</div><div class="line">pm2 help</div></pre></td></tr></table></figure>
+</li>
+<li><p>以配置文件方式启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start ecosystem.config.js --env production</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h1><blockquote>
+<p>linux环境安装软件的工作一般是运维人员处理好，而针对单个项目的部署才是开发者需要做的。</p>
+<h2 id="在git项目开启ssh秘钥"><a href="#在git项目开启ssh秘钥" class="headerlink" title="在git项目开启ssh秘钥"></a>在git项目开启ssh秘钥</h2><ul>
+<li>以gitlab为例，如果之前已经添加过服务器的密钥，那只需要在项目的“设置”下拉菜单中，进入“部署密钥”，然后在里面找到需要部署项目的服务器的密钥，点击“启用”就能以ssh方式拉取项目。<h2 id="运行nodejs实例"><a href="#运行nodejs实例" class="headerlink" title="运行nodejs实例"></a>运行nodejs实例</h2></li>
+<li>主流做法是用pm2启动：参考上一节pm2的说明。</li>
+<li>用nohub启动:nohup是linux环境的软件，能让进程在后台运行。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup node app.js &amp;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>用forever启动：具体参考（<a href="https://github.com/foreverjs/forever）" target="_blank" rel="external">https://github.com/foreverjs/forever）</a><h2 id="做nginx配置"><a href="#做nginx配置" class="headerlink" title="做nginx配置"></a>做nginx配置</h2></li>
+<li>nginx的说明参考上一节，或：<a href="http://www.nginx.cn/doc/" target="_blank" rel="external">http://www.nginx.cn/doc/</a></li>
+<li>nginx本身是一个性能优秀的web服务器，用于代理静态资源是很方便的。对于nodejs服务，能解决前后端分离的跨域问题，也能实现负载均衡。<h2 id="防火墙通行端口"><a href="#防火墙通行端口" class="headerlink" title="防火墙通行端口"></a>防火墙通行端口</h2></li>
+<li>假如nginx配置了虚拟主机占用8000端口，然后在本机curl <a href="http://localhost:8000是有响应的，但在其他机器上面访问却无响应。这时候可能是因为服务器开了防火墙而8000端口没被放行。" target="_blank" rel="external">http://localhost:8000是有响应的，但在其他机器上面访问却无响应。这时候可能是因为服务器开了防火墙而8000端口没被放行。</a></li>
+<li>添加端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 永久添加端口</div><div class="line">firewall-cmd --permanent --zone=public --add-port=8000/tcp</div><div class="line">// reload配置</div><div class="line">firewall-cmd --reload</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-03-07T12:44:50.830Z" itemprop="dateUpdated">2018-03-07 20:44:50</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/07/mongodb学习笔记/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mongodb学习笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
