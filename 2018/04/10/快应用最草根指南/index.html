@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>快应用最草根指南 | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="此文档目的在于：看完后能够对快应用从生态到开发有个概念性的理解，能够清晰开发思路上的调整、工具的准备、技术栈构成。 读者能在阅读完后，结合官方文档、项目例子通过实践就可以掌握快应用的开发。 不提供”从零到XX”此类路线型的教程，不提供文档已有说明的代码使用教程。  简介 安卓十大主流厂商（小米、华为、oppo、魅族…）联合 基于手机硬件平台（系统）提供统一的、标准的接入方式、运行环境。 无需安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快应用最草根指南">
+<meta property="og:url" content="http://maizsss.github.io/2018/04/10/快应用最草根指南/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="此文档目的在于：看完后能够对快应用从生态到开发有个概念性的理解，能够清晰开发思路上的调整、工具的准备、技术栈构成。 读者能在阅读完后，结合官方文档、项目例子通过实践就可以掌握快应用的开发。 不提供”从零到XX”此类路线型的教程，不提供文档已有说明的代码使用教程。  简介 安卓十大主流厂商（小米、华为、oppo、魅族…）联合 基于手机硬件平台（系统）提供统一的、标准的接入方式、运行环境。 无需安装">
+<meta property="og:updated_time" content="2018-04-10T10:14:29.264Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快应用最草根指南">
+<meta name="twitter:description" content="此文档目的在于：看完后能够对快应用从生态到开发有个概念性的理解，能够清晰开发思路上的调整、工具的准备、技术栈构成。 读者能在阅读完后，结合官方文档、项目例子通过实践就可以掌握快应用的开发。 不提供”从零到XX”此类路线型的教程，不提供文档已有说明的代码使用教程。  简介 安卓十大主流厂商（小米、华为、oppo、魅族…）联合 基于手机硬件平台（系统）提供统一的、标准的接入方式、运行环境。 无需安装">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">快应用最草根指南</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">快应用最草根指南</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-10T10:13:35.000Z" itemprop="datePublished" class="page-time">
+  2018-04-10
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发体验"><span class="post-toc-text">开发体验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#起步"><span class="post-toc-text">起步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调试"><span class="post-toc-text">调试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开发模式"><span class="post-toc-text">开发模式</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高级特性"><span class="post-toc-text">高级特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接口"><span class="post-toc-text">接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件通信"><span class="post-toc-text">组件通信</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优化技巧"><span class="post-toc-text">优化技巧</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建议"><span class="post-toc-text">建议</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-快应用最草根指南"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">快应用最草根指南</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-10 18:13:35" datetime="2018-04-10T10:13:35.000Z"  itemprop="datePublished">2018-04-10</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>此文档目的在于：看完后能够对快应用从生态到开发有个概念性的理解，能够清晰开发思路上的调整、工具的准备、技术栈构成。</p>
+<p>读者能在阅读完后，结合官方文档、项目例子通过实践就可以掌握快应用的开发。</p>
+<p>不提供”从零到XX”此类路线型的教程，不提供文档已有说明的代码使用教程。</p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>安卓十大主流厂商（小米、华为、oppo、魅族…）联合</li>
+<li>基于手机硬件平台（系统）提供统一的、标准的接入方式、运行环境。</li>
+<li>无需安装，秒开，具有与原生一样的应用体验，能够调用大多数系统功能、服务。</li>
+<li>使用前端技术栈开发，基本可以（一些问题的解决思路还是要请教安卓哥）在没有安卓开发经验下面进行快应用开发。</li>
+<li><a href="https://doc.quickapp.cn/" target="_blank" rel="external">官方文档</a>。以推广的最初阶段而言，文档做得算是用心。大部分能描述得清楚，小部分需要很细心才能“发掘”得出来。</li>
+</ul>
+<h2 id="开发体验"><a href="#开发体验" class="headerlink" title="开发体验"></a>开发体验</h2><h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><ul>
+<li>首先开发者要具备npm相关的知识或经验。快应用整套开发环境建立在npm生态之上，类比于前端技术栈中的“vue全家桶”的开发模式。</li>
+<li><a href="https://doc.quickapp.cn/tutorial/getting-started/build-environment.html" target="_blank" rel="external">环境搭建</a>直接参考文档，然后阅读<a href="https://doc.quickapp.cn/" target="_blank" rel="external">快速入门</a>章节尝试运行一个demo项目。</li>
+<li>编辑器使用vscode最佳，但原则上只要是个能写代码的都可以，.ux后缀的组件文件与html格式关联后可以高亮显示。</li>
+<li><strong>坑点1</strong>：请确认系统升至最新；调试器、平台预览版安装后如果还不能正常调试，请重新安装一遍 = =。。。</li>
+<li><strong>坑点2</strong>：如果遇到npm run server出现报错，就在项目根路径下执行hap update后重新npm install。</li>
+<li><strong>坑点3</strong>：nodejs版本请保证在7.6以上，别用8.0.*的版本。</li>
+</ul>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><ul>
+<li>在安卓上的调试器，可以唤起PC机上的chrome调试。方式是点击调试器上的“开始调试”。</li>
+<li>chrome调试界面可以看到当前页面的UI截屏（好low）；</li>
+<li>样式、页面结构的功能很不完善；</li>
+<li>网络请求栏，使用方法如常。</li>
+<li><p>console栏。需要在项目的manifest.json文件设置log级别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">　&quot;config&quot;: &#123;</div><div class="line">　     //有debug、log、info、warn、error五个级别。假如设为log，那么console.debug的信息就不会被打印出来。</div><div class="line">  　　&quot;logLevel&quot;: &quot;debug&quot; </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>坑点1</strong>：执行npm run watch后，原则上会自动监测文件变动、打包、刷新，但偶现无反应状况，需要在调试器再次点击“在线更新”。</p>
+</li>
+<li><strong>坑点2</strong>：在更新图片资源、更改manifest.json配置后，需要重新执行npm run watch 才能生效。</li>
+</ul>
+<h3 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h3><ul>
+<li><p>先了解原理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ux/js/css/less/img/json......==webpack==&gt; jsbundle（描述样式、结构、逻辑）、img ==webpack==&gt; rpk(jsbundle被gzip压缩后的文件) ==安卓快应用解析==&gt;调用原生功能</div></pre></td></tr></table></figure>
+</li>
+<li><p>以.ux为后缀的单文件组件开发模式。一个.ux文件为一个组件。路由级（页面）组件、纯逻辑组件、纯结构组件、可复用UI组件。顶级入口文件为app.ux。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">结构</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">逻辑</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style&gt;</div><div class="line">样式</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在<a href="https://doc.quickapp.cn/framework/manifest.html" target="_blank" rel="external">manifest.json</a>描述整个应用的路由关系、调用功能的声明、应用信息等等。。。一定要细看！</p>
+</li>
+<li><a href="https://doc.quickapp.cn/framework/script.html" target="_blank" rel="external">js</a>：可以用es6语法（babel转化），<a href="https://doc.quickapp.cn/tutorial/framework/using-async.html?h=async" target="_blank" rel="external">async/await</a>。全功能的js，但要注意全局对象是global而非window，而且global的的使用场景有限。</li>
+<li><a href="https://doc.quickapp.cn/tutorial/framework/page-style-and-layout.html?h=%E6%A0%B7%E5%BC%8F" target="_blank" rel="external">样式</a>：可以使用less（其实直接写css也没有不适感），布局上面只支持flex布局。大体上与web开发的css书写形式上相似，但并不等同于css，只支持有限的属性，渲染机制也（估计）不一样。</li>
+<li><a href="https://doc.quickapp.cn/framework/template.html" target="_blank" rel="external">结构</a>：与web开发不同，快应用的标签有不同的嵌套关系、支持的样式、事件，这些在文档都有描述。</li>
+<li><strong>提示</strong>：快应用不提供“浮动”、“绝对定位”、“块级、行内元素”这类概念的特性，降低了灵活性。但是提供各种功能性容器如：stack（层叠）、list、tabs、swiper。思路上面需要转变一些。</li>
+<li><strong>总结</strong>： 总体开发类似基于webpack的web单页应用开发，但某些特性上又有所区别，不适合照搬经验。</li>
+</ul>
+<h2 id="高级特性"><a href="#高级特性" class="headerlink" title="高级特性"></a>高级特性</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><ul>
+<li>路由、弹窗、分享、支付、二维码。。。。。。拥有很多系统级别的功能，支持范围、性能都大幅度领先web应用。</li>
+<li><p>需要在manifest.json文件先做接口声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;features&quot;: [</div><div class="line">    &#123; &quot;name&quot;: &quot;system.prompt&quot; &#125;,</div><div class="line">    &#123; &quot;name&quot;: &quot;system.router&quot; &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
+<li><p>调用方式大多数走回调函数风格(但有方式改造成async函数同步调用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pkg.hasInstalled(&#123;</div><div class="line">  package: &apos;com.hap.app&apos;,</div><div class="line">  success: function(data) &#123;</div><div class="line">    console.log(&quot;handling success: &quot; + data.result);</div><div class="line">  &#125;,</div><div class="line">  fail: function(data, code) &#123;</div><div class="line">    console.log(&quot;handling fail, code=&quot; + code);</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>调起支付宝支付</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">alipay.pay(&#123;</div><div class="line">  orderInfo: 字符串形式的支付参数,</div><div class="line">  callback:function(ret)&#123;</div><div class="line">    if (ret.resultStatus === &apos;9000&apos;) &#123;</div><div class="line">      // 支付成功</div><div class="line">    &#125; else &#123;</div><div class="line">      // 支付失败</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>调起微信支付（黑科技：router.push能打开deeplink！）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">router.push(&#123;</div><div class="line">  uri: &apos;weixin://wap/pay?支付参数&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><ul>
+<li><a href="https://doc.quickapp.cn/tutorial/framework/parent-child-component-communication.html?h=%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1" target="_blank" rel="external">https://doc.quickapp.cn/tutorial/framework/parent-child-component-communication.html?h=%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1</a><h3 id="优化技巧"><a href="#优化技巧" class="headerlink" title="优化技巧"></a>优化技巧</h3></li>
+<li><a href="https://doc.quickapp.cn/tutorial/framework/optimization-skills.html?h=%E4%BC%98%E5%8C%96" target="_blank" rel="external">https://doc.quickapp.cn/tutorial/framework/optimization-skills.html?h=%E4%BC%98%E5%8C%96</a></li>
+</ul>
+<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><ul>
+<li>遇到问题后多去<a href="http://bbs.quickapp.cn/" target="_blank" rel="external">官方论坛</a>逛逛，相当于github的issue区。但没有搜索功能很糟糕。</li>
+<li>文档先细看以上提到过的，其他的文档内容可以通过文档的搜索功能检索出来。</li>
+<li>文档里多数只列出功能的使用说明，而使用例子偏少，可以下载此<a href="http://statres.quickapp.cn/quickapp/rpktool/Tutorial-20180402.zip" target="_blank" rel="external">官方项目</a>参考代码例子。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-10T10:14:29.264Z" itemprop="dateUpdated">2018-04-10 18:14:29</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/10/koa最草根指南/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">koa最草根指南</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
