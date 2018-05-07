@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>从nodejs的stream说起 | maizsss blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="周末，实在无聊。看看人，看看车，还不如回家看兔子。看兔子也看不久，喂几个零食后不再喂，兔子就该拉的拉该发呆的继续发呆。还是看点技术的东西吧。  前言 好啦，这个文章就这么开头了。 我进入互联网行业是从web前端开始的，其实直到现在也是从事着前端开发相关的职位，只不过工作性质已经不单指是前端了，还包括了产品策划（渣渣水平）、服务器运维（也是渣渣）、nodejs开发。web前端开发已经很热了（其实热">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从nodejs的stream说起">
+<meta property="og:url" content="http://maizsss.github.io/2018/05/07/从nodejs的stream说起/index.html">
+<meta property="og:site_name" content="maizsss blog">
+<meta property="og:description" content="周末，实在无聊。看看人，看看车，还不如回家看兔子。看兔子也看不久，喂几个零食后不再喂，兔子就该拉的拉该发呆的继续发呆。还是看点技术的东西吧。  前言 好啦，这个文章就这么开头了。 我进入互联网行业是从web前端开始的，其实直到现在也是从事着前端开发相关的职位，只不过工作性质已经不单指是前端了，还包括了产品策划（渣渣水平）、服务器运维（也是渣渣）、nodejs开发。web前端开发已经很热了（其实热">
+<meta property="og:image" content="https://mmc-forecast.oss-cn-shanghai.aliyuncs.com/images/44a8d7fe733ce1-544x420.png">
+<meta property="og:updated_time" content="2018-05-07T01:18:30.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从nodejs的stream说起">
+<meta name="twitter:description" content="周末，实在无聊。看看人，看看车，还不如回家看兔子。看兔子也看不久，喂几个零食后不再喂，兔子就该拉的拉该发呆的继续发呆。还是看点技术的东西吧。  前言 好啦，这个文章就这么开头了。 我进入互联网行业是从web前端开始的，其实直到现在也是从事着前端开发相关的职位，只不过工作性质已经不单指是前端了，还包括了产品策划（渣渣水平）、服务器运维（也是渣渣）、nodejs开发。web前端开发已经很热了（其实热">
+<meta name="twitter:image" content="https://mmc-forecast.oss-cn-shanghai.aliyuncs.com/images/44a8d7fe733ce1-544x420.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="maizsss blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">maizsss</h5>
+          <a href="mailto:413750188@qq.com" title="413750188@qq.com" class="mail">413750188@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">从nodejs的stream说起</div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">从nodejs的stream说起</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-07T01:17:23.000Z" itemprop="datePublished" class="page-time">
+  2018-05-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nodejs的stream"><span class="post-toc-text">nodejs的stream</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nodejs的其他模块与stream的关系"><span class="post-toc-text">nodejs的其他模块与stream的关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nodejs的events"><span class="post-toc-text">nodejs的events</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-从nodejs的stream说起"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">从nodejs的stream说起</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-07 09:17:23" datetime="2018-05-07T01:17:23.000Z"  itemprop="datePublished">2018-05-07</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>周末，实在无聊。看看人，看看车，还不如回家看兔子。看兔子也看不久，喂几个零食后不再喂，兔子就该拉的拉该发呆的继续发呆。还是看点技术的东西吧。</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>好啦，这个文章就这么开头了。</li>
+<li>我进入互联网行业是从web前端开始的，其实直到现在也是从事着前端开发相关的职位，只不过工作性质已经不单指是前端了，还包括了产品策划（渣渣水平）、服务器运维（也是渣渣）、nodejs开发。web前端开发已经很热了（其实热了好几年了，估计还差不多热过头了），前端的热起在技术上其实真的离不开nodejs。很多人以为nodejs只是个能让javascript跑在服务端环境的一个平台而已，然后能做的事情与PHP这些是类似的，都是提供一个webserver。其实也说得没错，的确是这样。但程序员的脑洞很大，也非常地懒惰，他们除了拿nodejs来做webserver之外，还拿来做前端的工程化工具、各种奇奇怪怪新兴平台的脚本语言。尤其是前端工程化，这让web前端的逼格越了好几个档次。实现各种流程的自动化、前后端分离、跨平台的编译工具，硬生生地把前端的职责范围撑大了（我该感谢还是抱怨）。还是感谢吧，毕竟nodejs赐予了我能接触web开发全貌的机会。</li>
+<li><p>nodejs中文网首页最显眼的是这么一段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 </div><div class="line">Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。 </div><div class="line">Node.js 的包管理器 npm，是全球最大的开源库生态系统。</div></pre></td></tr></table></figure>
+</li>
+<li><p>我尝试逐句解释。</p>
+<ol>
+<li>这句好理解，关键词“V8”、“运行环境”，nodejs是个环境而非语言，nodejs使用V8来运行javascript的。</li>
+<li>这句比较难理解，我先查了一下其他文章。说是事件驱动，其实是因为nodejs的多数模块其实是继承了事件模块（events），I/O就是“对资源的读和写”，非阻塞就是在程序上的“读写”操作不阻塞后面程序的运行。至于为什么说是轻量和高效，我就是不知道了，其实很多语言都说自己是轻量高效啊。</li>
+<li>npm，分开来读单词：nodejs package manager，对javascript的开源包无论服务端还是浏览器端还是其他端都适用（所以没可能不大嘛）。</li>
+</ol>
+</li>
+<li>以上都是为了凑篇幅，下面正题吧。在平日nodejs的使用上，多数会通过上层库或框架去使用，以致对底层的原理了解很少。这次尝试去学习一个重要的模块stream去理解nodejs。</li>
+</ul>
+<h2 id="nodejs的stream"><a href="#nodejs的stream" class="headerlink" title="nodejs的stream"></a>nodejs的stream</h2><ul>
+<li><a href="http://nodejs.cn/api/stream.html" target="_blank" rel="external">stream（流）</a>是nodejs很重要的一个模块。在很多场景都用到了流，比如：前端工程化、网络、大数据量的处理。</li>
+<li><p>在目前的前端开发里，因为每个人都对gulp很熟悉了，gulp是前端进入工程化的一个重要的里程碑工具，配合上各种插件能帮助前端解决掉大量代码压缩、预编译等等工序。不认识的话看一段代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 这是一段less的预处理脚本</div><div class="line">function styles() &#123;</div><div class="line">  return gulp.src(paths.styles.src)</div><div class="line">    .pipe(less())</div><div class="line">    .pipe(cleanCSS())</div><div class="line">    // pass in options to the stream</div><div class="line">    .pipe(rename(&#123;</div><div class="line">      basename: &apos;main&apos;,</div><div class="line">      suffix: &apos;.min&apos;</div><div class="line">    &#125;))</div><div class="line">    .pipe(gulp.dest(paths.styles.dest));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码看到了几个gulp的方法：“src、pipe、dest”，另外的还有watch、task 。这些在翻开<a href="https://github.com/gulpjs/gulp/blob/master/index.js" target="_blank" rel="external">gulp的github仓库</a>就能清晰了，然而gulp的核心不在这里，这里只是对各个模块的封装和暴露api的入口而已。再看看<a href="https://github.com/gulpjs" target="_blank" rel="external">gulp的组</a>,重要的源码仓库是在“vinyl-fs”、“glob-watcher”、“to-through”、“glob-stream”这些，这里面会引用到“<a href="https://github.com/rvagg/through2/blob/master/through2.js" target="_blank" rel="external">through2</a>”,这其实就是对nodejs的stream模块的再次封装。不再细说gulp，这只是引出stream在工程化上的使用场景而已。换句话说，想了解nodejs怎么引用在工程化上面，读gulp源码是个好选择。</p>
+</li>
+<li>stream有四种类型：<ul>
+<li>Readable - 可读的流 (例如 fs.createReadStream()).</li>
+<li>Writable - 可写的流 (例如 fs.createWriteStream()).</li>
+<li>Duplex - 可读写的流 (例如 net.Socket).</li>
+<li>Transform - 在读写过程中可以修改和变换数据的 Duplex 流 (例如 zlib.createDeflate()).</li>
+</ul>
+</li>
+<li><p>stream.pipe()是官方推荐的消费流数据的主流方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 创建可读流，读取文件数据</div><div class="line">const r = fs.createReadStream(&apos;file.txt&apos;);</div><div class="line">// zlib是nodejs用于压缩的模块，也是继承于stream。</div><div class="line">const z = zlib.createGzip();</div><div class="line">// 创建可写流</div><div class="line">const w = fs.createWriteStream(&apos;file.txt.gz&apos;);</div><div class="line">// 读取文件，数据提供给消费者z，z再把数据提供给消费者w</div><div class="line">r.pipe(z).pipe(w);</div></pre></td></tr></table></figure>
+</li>
+<li><p>以上所说到的数据，其实都是操作Buffer，缓冲器。顾名思义就是流传输中的暂存区域。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc-forecast.oss-cn-shanghai.aliyuncs.com/images/44a8d7fe733ce1-544x420.png" alt="image" title="">
+                </div>
+                <div class="image-caption">image</div>
+            </figure>
+</li>
+</ul>
+<h2 id="nodejs的其他模块与stream的关系"><a href="#nodejs的其他模块与stream的关系" class="headerlink" title="nodejs的其他模块与stream的关系"></a>nodejs的其他模块与stream的关系</h2><ul>
+<li>上面举到了gulp这个在前端工程化实际使用流的例子。其实nodejs其他模块（重要模块）都有很多流的影子，而且基本涵盖常用模块。</li>
+<li><p>http/https</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">const http = require(&apos;http&apos;);</div><div class="line"></div><div class="line">const server = http.createServer((req, res) =&gt; &#123;</div><div class="line">  // req 是 http.IncomingMessage 的实例，这是一个 Readable Stream</div><div class="line">  // res 是 http.ServerResponse 的实例，这是一个 Writable Stream</div><div class="line"></div><div class="line">  let body = &apos;&apos;;</div><div class="line">  // 接收数据为 utf8 字符串，</div><div class="line">  // 如果没有设置字符编码，将接收到 Buffer 对象。</div><div class="line">  req.setEncoding(&apos;utf8&apos;);</div><div class="line"></div><div class="line">  // 如果监听了 &apos;data&apos; 事件，Readable streams 触发 &apos;data&apos; 事件 </div><div class="line">  req.on(&apos;data&apos;, (chunk) =&gt; &#123;</div><div class="line">    body += chunk;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  // end 事件表明整个 body 都接收完毕了 </div><div class="line">  req.on(&apos;end&apos;, () =&gt; &#123;</div><div class="line">    try &#123;</div><div class="line">      const data = JSON.parse(body);</div><div class="line">      // 发送一些信息给用户</div><div class="line">      res.write(typeof data);</div><div class="line">      res.end();</div><div class="line">    &#125; catch (er) &#123;</div><div class="line">      // json 数据解析失败 </div><div class="line">      res.statusCode = 400;</div><div class="line">      return res.end(`error: $&#123;er.message&#125;`);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.listen(1337);</div></pre></td></tr></table></figure>
+</li>
+<li><p>net.socket就是 Duplex 的实例，它的可读端可以消费从套接字（socket）中接收的数据， 可写端则可以将数据写入到套接字。 简单看看api吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">new net.Socket([options])</div><div class="line">创建一个 socket 对象。</div><div class="line"></div><div class="line">options &lt;Object&gt; 可用选项有：</div><div class="line">    fd: &lt;number&gt; 如果指定了该参数，则使用一个给定的文件描述符包装一个已存在的 socket，否则将创建一个新的 socket。</div><div class="line">    allowHalfOpen &lt;boolean&gt; 指示是否允许半打开的 TCP 连接。详情查看 net.createServer() 和 &apos;end&apos; 事件。默认是 false。</div><div class="line">    readable &lt;boolean&gt; 当传递了 fd 时允许读取 socket，否则忽略。默认 false。</div><div class="line">    writable &lt;boolean&gt; 当传递了 fd 时允许写入 socket，否则忽略。默认 false。</div><div class="line">Returns: &lt;net.Socket&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>fs模块里也有使用流,上文也有类似的代码例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fs.ReadStream 类</div><div class="line">fs.WriteStream 类</div><div class="line">fs.createReadStream(path[, options])</div><div class="line">fs.createWriteStream(path[, options])</div></pre></td></tr></table></figure>
+</li>
+<li><p>crypto加密模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 使用Cipher和管道流:</div><div class="line"></div><div class="line">const crypto = require(&apos;crypto&apos;);</div><div class="line">const fs = require(&apos;fs&apos;);</div><div class="line">const cipher = crypto.createCipher(&apos;aes192&apos;, &apos;a password&apos;);</div><div class="line"></div><div class="line">const input = fs.createReadStream(&apos;test.js&apos;);</div><div class="line">const output = fs.createWriteStream(&apos;test.enc&apos;);</div><div class="line"></div><div class="line">input.pipe(cipher).pipe(output);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="nodejs的events"><a href="#nodejs的events" class="headerlink" title="nodejs的events"></a>nodejs的events</h2><blockquote>
+<p>“所有的流都是 EventEmitter 的实例。”</p>
+<p>“大多数 Node.js 核心 API 都采用惯用的异步事件驱动架构，其中某些类型的对象（触发器）会周期性地触发命名事件来调用函数对象（监听器）。”</p>
+<ul>
+<li>以上是官方原话，印证了”事件驱动”的这一个概念。</li>
+<li>events实例的api很简洁，eventEmitter.on() 方法用于注册监听器，eventEmitter.emit() 方法用于触发事件。其余都是“辅助”性质的api。</li>
+<li>“事件模型”在浏览器端已经很常见了。vue也提供on、emit这些api。学名就叫做“订阅发布”。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const EventEmitter = require(&apos;events&apos;);</div><div class="line"></div><div class="line">class MyEmitter extends EventEmitter &#123;&#125;</div><div class="line"></div><div class="line">const myEmitter = new MyEmitter();</div><div class="line">myEmitter.on(&apos;event&apos;, () =&gt; &#123;</div><div class="line">  console.log(&apos;触发了一个事件！&apos;);</div><div class="line">&#125;);</div><div class="line">myEmitter.emit(&apos;event&apos;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>文章主要介绍了stream、events两个模块，目的不是深入这些模块的原理、用法，平日的使用中也极少几率直接用到，都是间接地在使用。我是希望通过翻找出nodejs的“基石”，联系各个模块的关系，从而帮助自己能构建出nodejs的全貌。</li>
+<li>而就是这么简洁明快的模块，nodejs在这之上构建出完整的一套api，支持着开发者在众多复杂场景下面的使用。</li>
+<li>有错误望指出，谢谢。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-05-07T01:18:30.470Z" itemprop="dateUpdated">2018-05-07 09:18:30</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://maizsss.github.io">
+            <img src="/img/avatar.jpg" alt="maizsss">
+            maizsss
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/10/快应用最草根指南/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">快应用最草根指南</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>maizsss &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '额~~~~';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'maizsss blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
