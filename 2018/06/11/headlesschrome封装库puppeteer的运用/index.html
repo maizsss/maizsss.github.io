@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://maizsss.github.io/2018/06/11/headlesschrome封装库puppeteer的运用/index.html">
 <meta property="og:site_name" content="maizsss blog">
 <meta property="og:description" content="介绍一下puppeteer 官方说明 Puppeteer is a Node library which provides a high-level API to control headless Chrome or Chromium over the DevTools Protocol. It can also be configured to use full (non-headless) C">
-<meta property="og:updated_time" content="2018-06-11T06:33:22.578Z">
+<meta property="og:updated_time" content="2018-06-14T07:35:00.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="headlesschrome封装库puppeteer的运用">
 <meta name="twitter:description" content="介绍一下puppeteer 官方说明 Puppeteer is a Node library which provides a high-level API to control headless Chrome or Chromium over the DevTools Protocol. It can also be configured to use full (non-headless) C">
@@ -169,10 +169,17 @@
 <li>另外，可以清楚的是，puppeteer运行在nodejs平台，作为一个npm包去引入，与npm强大的生态资源配合起来使用，可以做很多事情。<h3 id="linux环境下使用"><a href="#linux环境下使用" class="headerlink" title="linux环境下使用"></a>linux环境下使用</h3></li>
 <li>一般来说，我们会在windows或者mac系统下使用chrome。而linux，对于像chrome这样的GUI应用程序来说并不合适在其之上运行。然而还是有方式。</li>
 <li>当npm安装puppeteer时，会默认安装了chromium。但安装了chromium并不意味着马上就可以在linux上运行，因为还缺少一些依赖。</li>
-<li>以centos7为例，需要执行以下命令安装一系列依赖。</li>
-<li>安装这些依赖成功后，就可以让puppeteer以headless模式运行了。</li>
-<li>除此之外，当你对一些页面进行截图时会发现，有些汉字显示不完整，这是因为缺少了中文字体库和一些字库依赖。那就安装一下。</li>
-<li>至此，puppeteer就能运行在linux下了。<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2></li>
+<li><p>以centos7为例，需要执行以下命令安装一系列依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 依赖库</div><div class="line">yum install pango.x86_64 libXcomposite.x86_64 libXcursor.x86_64 libXdamage.x86_64 libXext.x86_64 libXi.x86_64 libXtst.x86_64 cups-libs.x86_64 libXScrnSaver.x86_64 libXrandr.x86_64 GConf2.x86_64 alsa-lib.x86_64 atk.x86_64 gtk3.x86_64 -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装这些依赖成功后，就可以让puppeteer以headless模式运行了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 字体</div><div class="line">yum install ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>除此之外，当你对一些页面进行截图时会发现，有些汉字显示不完整，这是因为缺少了中文字体库和一些字库依赖。那就安装一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 中文字体适配</div><div class="line">yum groupinstall &quot;Chinese Support&quot;</div><div class="line">yum groupinstall &quot;Font&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>至此，puppeteer就能运行在linux下了。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2></li>
 <li>在官网上，已经列出了几条puppeteer的主要使用方式。<ul>
 <li>Generate screenshots and PDFs of pages.<br>Crawl a SPA and generate pre-rendered content (i.e. “SSR”).</li>
 <li>Automate form submission, UI testing, keyboard input, etc.</li>
@@ -208,7 +215,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2018-06-11T06:33:22.578Z" itemprop="dateUpdated">2018-06-11 14:33:22</time>
+    Last updated: <time datetime="2018-06-14T07:35:00.664Z" itemprop="dateUpdated">2018-06-14 15:35:00</time>
 </span><br>
 
 
